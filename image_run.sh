@@ -8,4 +8,4 @@ docker run -it \
 -v ./picoclaw-npm-cache:/root/.npm \
 -p 18800:18800 \
 -p 18790:18790 \
-martinklewitz/picoclaw-battery:latest
+.

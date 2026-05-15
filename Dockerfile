@@ -12,10 +12,10 @@ RUN apk add --no-cache \
   jq
 
 # Install Playwright browsers for agent-browser
-ENV PLAYWRIGHT_BROWSERS_PATH=/opt/playwright-browsers
-RUN npm install -g agent-browser && \
-    npx playwright install chromium && \
-    chmod -R o+rx $PLAYWRIGHT_BROWSERS_PATH
+# ENV PLAYWRIGHT_BROWSERS_PATH=/opt/playwright-browsers
+# RUN npm install -g agent-browser && \
+#    npx playwright install chromium && \
+#    chmod -R o+rx $PLAYWRIGHT_BROWSERS_PATH
 
 # Install uv
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh && \
@@ -24,11 +24,18 @@ RUN curl -LsSf https://astral.sh/uv/install.sh | sh && \
   uv --version \
 
 
+RUN wget -O /etc/apk/keys/claude-code.rsa.pub \
+  https://downloads.claude.ai/keys/claude-code.rsa.pub \
+  echo "https://downloads.claude.ai/claude-code/apk/stable" >> /etc/apk/repositories \
+  apk add claude-code
+
+
 # Copy binaries
 COPY --from=picoclaw /usr/local/bin/picoclaw /usr/local/bin/picoclaw
 COPY --from=picoclaw /usr/local/bin/picoclaw-launcher /usr/local/bin/picoclaw-launcher
 
-# RUN /usr/local/bin/picoclaw onboard
+# Create picoclaw home directory
+RUN /usr/local/bin/picoclaw onboard
 
 ENTRYPOINT ["picoclaw-launcher"]
 CMD ["-console", "-public", "-no-browser"]
