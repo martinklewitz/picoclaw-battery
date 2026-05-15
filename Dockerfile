@@ -21,12 +21,12 @@ RUN apk add --no-cache \
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh && \
   ln -s /root/.local/bin/uv /usr/local/bin/uv && \
   ln -s /root/.local/bin/uvx /usr/local/bin/uvx && \
-  uv --version \
+  uv --version
 
 
 RUN wget -O /etc/apk/keys/claude-code.rsa.pub \
-  https://downloads.claude.ai/keys/claude-code.rsa.pub \
-  echo "https://downloads.claude.ai/claude-code/apk/stable" >> /etc/apk/repositories \
+  https://downloads.claude.ai/keys/claude-code.rsa.pub && \
+  echo "https://downloads.claude.ai/claude-code/apk/stable" >> /etc/apk/repositories && \
   apk add claude-code
 
 
