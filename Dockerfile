@@ -30,12 +30,5 @@ COPY --from=picoclaw /usr/local/bin/picoclaw-launcher /usr/local/bin/picoclaw-la
 
 # RUN /usr/local/bin/picoclaw onboard
 
-# Copy default workspace
-COPY workspace/ /root/.picoclaw/workspace/
-
-VOLUME /root/.picoclaw/workspace
-VOLUME /root/.picoclaw/config.json
-VOLUME /root/.npm
-
 ENTRYPOINT ["picoclaw-launcher"]
 CMD ["-console", "-public", "-no-browser"]
