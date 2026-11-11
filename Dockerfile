@@ -1,4 +1,4 @@
-FROM docker.io/sipeed/picoclaw:v0.2.9-launcher AS picoclaw
+FROM docker.io/sipeed/picoclaw:v0.3.1-launcher AS picoclaw
 
 FROM node:24-alpine3.23
 
